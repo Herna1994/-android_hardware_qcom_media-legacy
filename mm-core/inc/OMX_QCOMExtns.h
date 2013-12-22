@@ -1,5 +1,5 @@
 /*--------------------------------------------------------------------------
-Copyright (c) 2009-2012, Code Aurora Forum. All rights reserved.
+Copyright (c) 2009-2013, The Linux Foundation. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -8,7 +8,7 @@ modification, are permitted provided that the following conditions are met:
     * Redistributions in binary form must reproduce the above copyright
       notice, this list of conditions and the following disclaimer in the
       documentation and/or other materials provided with the distribution.
-    * Neither the name of Code Aurora nor
+    * Neither the name of The Linux Foundation nor
       the names of its contributors may be used to endorse or promote
       products derived from this software without specific prior written
       permission.
@@ -250,13 +250,11 @@ enum OMX_QCOM_COLOR_FORMATTYPE
  *  interleaved V and U pixels. V and U pixels are sub-sampled
  *  by a factor of two both horizontally and vertically.
  */
-    QOMX_COLOR_FormatYVU420SemiPlanar = 0x7FA30C00,
-    QOMX_COLOR_FormatYVU420PackedSemiPlanar32m4ka,
+    QOMX_COLOR_FormatYVU420PackedSemiPlanar32m4ka = 0x7FA30C01,
     QOMX_COLOR_FormatYUV420PackedSemiPlanar16m2ka,
     QOMX_COLOR_FormatYUV420PackedSemiPlanar64x32Tile2m8ka,
     QOMX_COLOR_FormatYUV420PackedSemiPlanar32m4ka_nv21,
     QOMX_COLOR_FormatYUV420PackedSemiPlanar16m2ka_nv21,
-    QOMX_COLOR_FORMATYUV420PackedSemiPlanar32m,
     QOMX_COLOR_FormatAndroidOpaque = (OMX_COLOR_FORMATTYPE) OMX_COLOR_FormatVendorStartUnused  + 0x789,
 };
 
@@ -270,8 +268,7 @@ enum OMX_QCOM_VIDEO_CODINGTYPE
     QOMX_VIDEO_CodingDivx = 0x7FA30C02,     /**< Value when coding is Divx */
     QOMX_VIDEO_CodingSpark = 0x7FA30C03,     /**< Value when coding is Sorenson Spark */
     QOMX_VIDEO_CodingVp = 0x7FA30C04,
-    QOMX_VIDEO_CodingVp8 = 0x7FA30C05,
-    QOMX_VIDEO_CodingHevc = 0x7FA30C06
+    QOMX_VIDEO_CodingVp8 = 0x7FA30C05
 };
 
 enum OMX_QCOM_EXTN_INDEXTYPE
@@ -361,10 +358,12 @@ enum OMX_QCOM_EXTN_INDEXTYPE
 
     OMX_QcomIndexEnableSliceDeliveryMode = 0x7F00001F,
 
-    OMX_QcomIndexEnableExtnUserData = 0x7F000020,
+    OMX_QcomIndexParamSequenceHeaderWithIDR = 0x7F000020,
+
+    OMX_QcomIndexEnableExtnUserData = 0x7F000021,
 
     /*"OMX.QCOM.index.param.video.EnableSmoothStreaming"*/
-    OMX_QcomIndexParamEnableSmoothStreaming = 0x7F000021,
+    OMX_QcomIndexParamEnableSmoothStreaming = 0x7F000022,
 };
 
 /**
@@ -593,6 +592,12 @@ typedef struct OMX_QCOM_ASPECT_RATIO
    OMX_U32 aspectRatioY;
 } OMX_QCOM_ASPECT_RATIO;
 
+typedef struct OMX_QCOM_DISPLAY_ASPECT_RATIO
+{
+   OMX_U32 displayVerticalSize;
+   OMX_U32 displayHorizontalSize;
+} OMX_QCOM_DISPLAY_ASPECT_RATIO;
+
 typedef struct OMX_QCOM_FRAME_PACK_ARRANGEMENT
 {
   OMX_U32 nSize;
@@ -625,6 +630,7 @@ typedef struct OMX_QCOM_EXTRADATA_FRAMEINFO
    OMX_QCOM_INTERLACETYPE interlaceType;
    OMX_QCOM_PANSCAN       panScan;
    OMX_QCOM_ASPECT_RATIO  aspectRatio;
+   OMX_QCOM_DISPLAY_ASPECT_RATIO displayAspectRatio;
    OMX_U32                nConcealedMacroblocks;
    OMX_U32                nFrameRate;
 } OMX_QCOM_EXTRADATA_FRAMEINFO;

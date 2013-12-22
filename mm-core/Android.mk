@@ -3,8 +3,6 @@ ifneq ($(BUILD_TINY_ANDROID),true)
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
-OMXCORE_CFLAGS := -g -O3 -DVERBOSE
-OMXCORE_CFLAGS += -O0 -fno-inline -fno-short-enums
 OMXCORE_CFLAGS += -D_ANDROID_
 OMXCORE_CFLAGS += -U_ENABLE_QC_MSG_LOG_
 
@@ -57,7 +55,8 @@ LOCAL_COPY_HEADERS      += inc/QOMX_SourceExtensions.h
 LOCAL_COPY_HEADERS      += inc/QOMX_VideoExtensions.h
 LOCAL_COPY_HEADERS      += inc/OMX_IndexExt.h
 LOCAL_COPY_HEADERS      += inc/QOMX_StreamingExtensions.h
-
+LOCAL_COPY_HEADERS      += inc/QCMediaDefs.h
+LOCAL_COPY_HEADERS      += inc/QCMetaData.h
 
 #===============================================================================
 #             LIBRARY for Android apps
